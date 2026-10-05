@@ -1,0 +1,589 @@
+/* Variables de Paleta de Colores Oscuro/Premium */
+:root {
+    --bg-app: #0f172a;
+    --bg-card: #1e293b;
+    --bg-hover: #334155;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent: #6366f1;
+    --accent-hover: #4f46e5;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --border-color: #334155;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+    background-color: var(--bg-app);
+    color: var(--text-main);
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* Contenedor General estilo Aplicación */
+.app-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Barra Lateral (Sidebar) */
+.sidebar {
+    width: 260px;
+    background-color: var(--bg-card);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    flex-shrink: 0;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.brand h2 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1;
+}
+
+.menu-item {
+    display: block;
+    padding: 12px 16px;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.menu-item:hover, .menu-item.active {
+    background-color: var(--bg-hover);
+    color: var(--text-main);
+}
+
+.menu-item.active {
+    background-color: var(--accent);
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-color);
+}
+
+.avatar {
+    font-size: 24px;
+    background: var(--bg-hover);
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.user-role {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* Área del Contenido Central */
+.main-content {
+    flex-grow: 1;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+/* Barra superior */
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    gap: 20px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 12px 16px;
+    border-radius: 14px;
+    width: 400px;
+    gap: 10px;
+}
+
+.search-bar input {
+    background: none;
+    border: none;
+    color: var(--text-main);
+    width: 100%;
+    outline: none;
+    font-size: 14px;
+}
+
+.btn-primary {
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+}
+
+/* Tarjetas Numéricas superiores */
+.dashboard-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 24px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.stat-icon {
+    font-size: 28px;
+    padding: 12px;
+    border-radius: 14px;
+    background-color: var(--bg-hover);
+}
+
+.stat-data h3 {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.stat-data p {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+/* Tablas */
+.inventory-section {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 24px;
+}
+
+.section-header h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+.modern-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.modern-table th, .modern-table td {
+    padding: 16px;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 14px;
+}
+
+.modern-table th {
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.product-cell {
+    color: var(--text-main);
+}
+
+/* Etiquetas de Estado (Badges) */
+.badge {
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.status-good {
+    background-color: rgba(16, 185, 129, 0.15);
+    color: var(--success);
+}
+
+.status-low {
+    background-color: rgba(245, 158, 11, 0.15);
+    color: var(--warning);
+}
+
+.status-expired {
+    background-color: rgba(239, 68, 68, 0.15);
+    color: var(--danger);
+}
+
+/* ==========================================
+   PANEL DE ALERTAS
+   ========================================== */
+.section-header-alerts {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.alert-filters {
+    display: flex;
+    gap: 8px;
+}
+
+.filter-badge {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.filter-badge.active, .filter-badge:hover {
+    background-color: var(--bg-hover);
+    color: var(--text-main);
+}
+
+.filter-badge.active {
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+
+.alerts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.alert-card-container {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.card-alert-header {
+    padding: 16px 24px;
+    font-size: 14px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.stock-critical { background-color: rgba(239, 68, 68, 0.05); }
+.date-critical { background-color: rgba(245, 158, 11, 0.05); }
+
+.alert-list {
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    gap: 8px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.alert-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg-app);
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.alert-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.severity-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.dot-high { background-color: var(--danger); }
+.dot-medium { background-color: var(--warning); }
+
+.alert-details h4 { font-size: 14px; font-weight: 600; }
+.alert-details p { font-size: 12px; color: var(--text-muted); }
+
+.alert-action-zone {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.qty-badge, .date-badge {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.qty-badge.danger, .date-badge.danger { color: var(--danger); background: rgba(239, 68, 68, 0.1); }
+.qty-badge.warning, .date-badge.warning { color: var(--warning); background: rgba(245, 158, 11, 0.1); }
+
+/* Ventana Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 999;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    width: 500px;
+    border-radius: 24px;
+    padding: 32px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.modal-form label {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.modal-form input, .modal-form select {
+    background-color: var(--bg-app);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 12px 16px;
+    border-radius: 12px;
+    outline: none;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 12px 24px;
+    border-radius: 14px;
+    cursor: pointer;
+}
+
+/* Clase Clave de Utilidad para Ocultar Vistas */
+.hidden {
+    display: none !important;
+}
+
+/* ==========================================================================
+   ESTILOS ESPECIALES PARA IMPRESIÓN Y EXPORTACIÓN A PDF
+   ========================================================================== */
+@media print {
+    /* Ocultar toda la interfaz de la aplicación, menús, barras y botones */
+    body, .sidebar, .top-header, .dashboard-overview, .btn-primary, .menu, .user-profile {
+        display: none !important;
+    }
+    
+    /* Forzar a que solo se muestre el contenedor del reporte a pantalla completa */
+    .app-container, .main-content, #reportes-section {
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        background: transparent !important;
+        color: #000000 !important; /* Texto negro para hojas de papel */
+    }
+
+    #printable-report-area {
+        border: none !important;
+        background: white !important;
+        color: black !important;
+        padding: 20px !important;
+        box-shadow: none !important;
+    }
+
+    #printable-report-area *, #printable-report-area span, #printable-report-area strong {
+        color: black !important;
+    }
+}
+
+/* ==========================================================================
+   PANTALLA DE INICIO DE SESIÓN (LOGIN OVERLAY)
+   ========================================================================== */
+.login-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-app);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Por encima de todo el sistema */
+    transition: opacity 0.4s ease, pointer-events 0.4s ease;
+    backdrop-filter: blur(10px);
+}
+
+/* Ocultar el Login suavemente cuando el usuario sea correcto */
+.login-overlay.logged-in {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.login-box {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    width: 400px;
+    max-width: 90%;
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.login-header h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 12px;
+    margin-bottom: 8px;
+}
+
+.login-header p {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   BOTONES DE EDICIÓN Y ELIMINACIÓN EN LA TABLA
+   ========================================================================== */
+.actions-cell {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-action-table {
+    background-color: var(--bg-hover);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.2s ease;
+}
+
+/* Color al pasar el mouse por encima */
+.btn-action-table.edit:hover {
+    background-color: rgba(99, 102, 241, 0.15);
+    border-color: var(--accent);
+    color: var(--text-main);
+}
+
+.btn-action-table.delete:hover {
+    background-color: rgba(239, 68, 68, 0.15);
+    border-color: var(--danger);
+    color: var(--danger);
+}

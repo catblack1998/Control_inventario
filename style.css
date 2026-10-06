@@ -671,4 +671,32 @@ body {
     background-color: rgba(239, 68, 68, 0.15);
     border-color: var(--danger);
     color: var(--danger);
+
+    /* ==========================================================================
+       AJUSTES PARA LA VENTANA MODAL EN CELULARES
+       ========================================================================== */
+    .modal-overlay {
+        padding: 16px; /* Evita que toque los bordes del teléfono */
+        align-items: flex-start; /* Alinea arriba para dar espacio al teclado */
+        overflow-y: auto !important; /* Permite deslizar la pantalla si el modal es muy alto */
+    }
+
+    .modal-content {
+        width: 100% !important;
+        max-height: 90vh; /* No permite que sea más alto que la pantalla del móvil */
+        overflow-y: auto !important; /* Si no cabe, crea un deslizamiento limpio adentro */
+        padding: 20px !important;
+        margin-top: 20px; /* Separación estética superior */
+    }
+
+    /* Transformar campos dobles en filas individuales para que no se amontonen */
+    .form-row {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+    
+    .modal-form {
+        gap: 12px !important;
+    }
+    
 }

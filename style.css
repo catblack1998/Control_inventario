@@ -698,5 +698,27 @@ body {
     .modal-form {
         gap: 12px !important;
     }
+
+        /* ==========================================================================
+       FORZAR SELECTOR DE FECHA NATIVO EN PANTALLAS TÁCTILES
+       ========================================================================== */
+    input[type="date"] {
+        position: relative;
+        -webkit-appearance: listbox; /* Fuerza al navegador móvil a tratarlo como lista desplegable */
+        min-height: 45px; /* Hace el campo más alto para que sea fácil tocarlo con el dedo */
+        cursor: pointer;
+    }
+
+    /* Asegurar que el calendario flotante del celular no se quede atrapado detrás del modal */
+    .modal-content {
+        position: relative;
+        z-index: 1001 !important;
+        overflow-y: visible !important; /* Cambiamos a visible en móvil para que el calendario pueda desbordar la caja */
+    }
+    
+    .modal-overlay {
+        overflow-y: scroll !important; /* Trasladamos el deslizamiento a la pantalla de fondo */
+    }
+
 }
 

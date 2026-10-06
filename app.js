@@ -1,5 +1,6 @@
-// === CREDENCIALES DEL SUPERMERCADO Y ESTADO DE SESIÓN ===
-const CREDENCIALES_MAESTRAS = { usuario: "admin", contrasena: "1234" };
+// === SISTEMA DE SEGURIDAD INTELIGENTE (REGISTRO / LOGIN) ===
+// Intentar buscar si ya existe un usuario y contraseña creados en el dispositivo
+let cuentaCreada = JSON.parse(localStorage.getItem('superstock_cuenta_maestra')) || null;
 
 // Selectores del Sistema de Seguridad
 const loginOverlay = document.getElementById('login-overlay');
@@ -8,8 +9,26 @@ const loginError = document.getElementById('login-error');
 const btnLogout = document.getElementById('btnLogout');
 const displayUserName = document.getElementById('display-user-name');
 
-// 1. Verificar si el usuario ya estaba logueado en este dispositivo
-document.addEventListener('DOMContentLoaded', () => {
+const loginTitle = document.getElementById('login-title');
+const loginDescription = document.getElementById('login-description');
+const btnLoginSubmit = document.getElementById('btn-login-submit');
+
+// Función automática para verificar el estado de la cuenta al abrir la app
+function inicializarSeguridad() {
+    if (!loginOverlay) return;
+
+    // Si ya hay una cuenta registrada en la memoria, cambiar al modo "Iniciar Sesión"
+    if (cuentaCreada) {
+        if (loginTitle) loginTitle.textContent = "SuperStock Login";
+        if (loginDescription) loginDescription.textContent = "Introduce tus credenciales para acceder al sistema del supermercado.";
+        if (btnLoginSubmit) btnLoginSubmit.textContent = "🔓 Entrar al Sistema";
+    } else {
+        // Si no hay cuenta, forzar el modo "Configuración Inicial por primera vez"
+        if (loginTitle) loginTitle.textContent = "Crear Administrador";
+        if (loginDescription) loginDescription.textContent = "Detectamos que es tu primera vez aquí. Crea las credenciales maestras de tu supermercado.";
+        if (btnLoginSubmit) btnLoginSubmit.textContent = "💾 Registrar y Activar";
+    }
+    // Mantener la sesión abierta si el usuario no cerró sesión la última vez
     const sesionActiva = localStorage.getItem('superstock_sesion_activa');
     const usuarioGuardado = localStorage.getItem('superstock_usuario_actual');
     
@@ -17,9 +36,12 @@ document.addEventListener('DOMContentLoaded', () => {
         loginOverlay.classList.add('logged-in');
         if (displayUserName && usuarioGuardado) displayUserName.textContent = usuarioGuardado;
     }
-});
+}
 
-// 2. Control del Formulario de Inicio de Sesión
+// Ejecutar la inicialización de seguridad apenas cargue la página
+document.addEventListener('DOMContentLoaded', inicializarSeguridad);
+
+// === CONTROL DEL FORMULARIO DE SEGURIDAD (GUARDAR O VALIDAR) ===
 if (loginForm) {
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -27,9 +49,36 @@ if (loginForm) {
         const userInput = document.getElementById('login-user').value.trim();
         const passInput = document.getElementById('login-pass').value;
 
-        // Validar contra las credenciales maestras
-        if (userInput === CREDENCIALES_MAESTRAS.usuario && passInput === CREDENCIALES_MAESTRAS.contrasena) {
-            // Guardar estado en el navegador y ocultar pantalla de bloqueo
+        // CASO A: Es la primera vez y el usuario va a CREAR su cuenta
+        if (!cuentaCreada) {
+            if (passInput.length < 4) {
+                if (loginError) {
+                    loginError.textContent = "⚠️ La contraseña debe tener al menos 4 caracteres.";
+                    loginError.style.display = 'block';
+                }
+                return;
+            }
+
+            // Guardar la cuenta de forma permanente en el almacenamiento del dispositivo
+            cuentaCreada = { usuario: userInput, contrasena: passInput };
+            localStorage.setItem('superstock_cuenta_maestra', JSON.stringify(cuentaCreada));
+
+            // Iniciar la sesión automáticamente tras el registro exitoso
+            localStorage.setItem('superstock_sesion_activa', 'true');
+            localStorage.setItem('superstock_usuario_actual', userInput);
+            
+            if (loginOverlay) loginOverlay.classList.add('logged-in');
+            if (displayUserName) displayUserName.textContent = userInput;
+            if (loginError) loginError.style.display = 'none';
+            
+            alert(`🎉 ¡Cuenta activada con éxito! Tu usuario es "${userInput}". Guarda bien tu contraseña.`);
+            loginForm.reset();
+            inicializarSeguridad(); // Actualiza los textos para la próxima vez
+            return;
+        }
+
+        // CASO B: La cuenta ya existe y el usuario está INICIANDO SESIÓN tradicional
+        if (userInput === cuentaCreada.usuario && passInput === cuentaCreada.contrasena) {
             localStorage.setItem('superstock_sesion_activa', 'true');
             localStorage.setItem('superstock_usuario_actual', userInput);
             
@@ -39,20 +88,29 @@ if (loginForm) {
             
             loginForm.reset();
         } else {
-            // Mostrar mensaje de error si las credenciales fallan
-            if (loginError) loginError.style.display = 'block';
+            // Mostrar error si el usuario o la clave no coinciden con la cuenta guardada
+            if (loginError) {
+                loginError.textContent = "⚠️ Usuario o contraseña incorrectos.";
+                loginError.style.display = 'block';
+            }
         }
     });
 }
 
-// 3. Control de Cierre de Sesión (Bloquear App de Nuevo)
+// === CONTROL DE CIERRE DE SESIÓN (BLOQUEAR APLICACIÓN) ===
 if (btnLogout) {
     btnLogout.addEventListener('click', () => {
-        localStorage.removeItem('superstock_sesion_activa');
-        localStorage.removeItem('superstock_usuario_actual');
-        if (loginOverlay) loginOverlay.classList.remove('logged-in');
+        const confirmarSalir = confirm("🔒 ¿Deseas cerrar sesión y bloquear el sistema de inventario?");
+        if (confirmarSalir) {
+            localStorage.removeItem('superstock_sesion_activa');
+            localStorage.removeItem('superstock_usuario_actual');
+            if (loginOverlay) loginOverlay.classList.remove('logged-in');
+            loginForm.reset();
+            inicializarSeguridad(); // Asegura que los textos digan "SuperStock Login"
+        }
     });
 }
+
 
 // === CONTROL DE ALMACENAMIENTO (LOCALSTORAGE) ===
 let inventario = JSON.parse(localStorage.getItem('superstock_inventario')) || [];

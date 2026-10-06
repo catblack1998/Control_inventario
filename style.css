@@ -213,7 +213,8 @@ body {
 }
 
 .table-container {
-    overflow-x: auto;
+    overflow-x: !important;
+    -webkit-overflow-scrolling: touch; /* Hace que el deslizamiento en iPhone sea suave */
 }
 
 .modern-table {

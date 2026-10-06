@@ -213,8 +213,7 @@ body {
 }
 
 .table-container {
-    overflow-x: !important;
-    -webkit-overflow-scrolling: touch; /* Hace que el deslizamiento en iPhone sea suave */
+    overflow-x: auto;
 }
 
 .modern-table {
@@ -577,22 +576,23 @@ body {
 }
 
 /* ==========================================================================
-   ESTILOS RESPONSIVE PARA DISPOSITIVOS MÓVILES (CELULARES)
+   ESTILOS RESPONSIVE COMPLETOS PARA DISPOSITIVOS MÓVILES (CELULARES)
    ========================================================================== */
 @media screen and (max-width: 768px) {
-    /* Forzar a que el cuerpo de la página SÍ permita deslizar en el celular */
+    /* 1. Forzar a que la página SÍ permita deslizar en el celular */
     body {
         overflow-y: auto !important;
         height: auto !important;
     }
-    /* 1. Cambiar la estructura de horizontal a vertical */
+
+    /* Ajustar el contenedor para que se estire verticalmente en el teléfono */
     .app-container {
         flex-direction: column;
-        overflow-y: !important;
-        height: !important;
+        overflow-y: visible !important;
+        height: auto !important;
     }
 
-    /* 2. Barra lateral se convierte en barra superior */
+    /* 2. La barra lateral se convierte en un menú superior adaptable */
     .sidebar {
         width: 100%;
         border-right: none;
@@ -608,7 +608,7 @@ body {
     .menu {
         flex-direction: row;
         flex-wrap: wrap;
-        gap: 4px;
+        gap: 6px;
         justify-content: center;
     }
 
@@ -617,13 +617,15 @@ body {
         font-size: 13px;
     }
 
+    /* Ocultar el perfil de usuario abajo en móviles para ganar espacio */
     .user-profile {
-        display: none; /* Ocultar perfil en móvil para ahorrar espacio */
+        display: none !important;
     }
 
-    /* 3. Contenido Principal Ajustado */
+    /* 3. Área de Contenido Principal Ajustada al ancho móvil */
     .main-content {
         padding: 16px;
+        overflow-y: visible !important;
     }
 
     .top-header {
@@ -641,52 +643,50 @@ body {
         text-align: center;
     }
 
-    /* 4. Tarjetas de resumen en una sola columna */
+    /* 4. Tarjetas del Dashboard y Cuadrícula de Alertas en una sola columna */
     .dashboard-overview {
         grid-template-columns: 1fr;
         gap: 12px;
     }
 
-    /* 5. Cuadrícula de alertas en una sola columna */
     .alerts-grid {
         grid-template-columns: 1fr;
+        gap: 16px;
     }
 
-    /* 6. Caja de Login adaptable al ancho del celular */
+    /* Transacción de entradas/salidas en una sola columna */
+    .transaction-container {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+
+    /* 5. Forzar deslizamiento horizontal cómodo en la Tabla */
+    .table-container {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* 6. Caja de Inicio de Sesión Adaptable */
     .login-box {
-        width: 90%;
+        width: 92%;
         padding: 24px;
     }
-}
-
-
-/* Color al pasar el mouse por encima */
-.btn-action-table.edit:hover {
-    background-color: rgba(99, 102, 241, 0.15);
-    border-color: var(--accent);
-    color: var(--text-main);
-}
-
-.btn-action-table.delete:hover {
-    background-color: rgba(239, 68, 68, 0.15);
-    border-color: var(--danger);
-    color: var(--danger);
 
     /* ==========================================================================
-       AJUSTES PARA LA VENTANA MODAL EN CELULARES
+       AJUSTES PARA LA VENTANA MODAL EN CELULARES (EVITA BLOQUEO DE TECLADO)
        ========================================================================== */
     .modal-overlay {
-        padding: 16px; /* Evita que toque los bordes del teléfono */
-        align-items: flex-start; /* Alinea arriba para dar espacio al teclado */
-        overflow-y: auto !important; /* Permite deslizar la pantalla si el modal es muy alto */
+        padding: 16px;
+        align-items: flex-start; /* Permite que empiece arriba para dar espacio al teclado */
+        overflow-y: auto !important; /* Desliza la pantalla si el modal supera el alto */
     }
 
     .modal-content {
         width: 100% !important;
-        max-height: 90vh; /* No permite que sea más alto que la pantalla del móvil */
-        overflow-y: auto !important; /* Si no cabe, crea un deslizamiento limpio adentro */
+        max-height: 85vh; /* No permite que tape toda la pantalla vertical */
+        overflow-y: auto !important; /* Crea un deslizamiento interno muy cómodo */
         padding: 20px !important;
-        margin-top: 20px; /* Separación estética superior */
+        margin-top: 10px;
     }
 
     /* Transformar campos dobles en filas individuales para que no se amontonen */
@@ -698,5 +698,5 @@ body {
     .modal-form {
         gap: 12px !important;
     }
-    
 }
+

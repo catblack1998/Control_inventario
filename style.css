@@ -575,6 +575,85 @@ body {
     transition: all 0.2s ease;
 }
 
+/* ==========================================================================
+   ESTILOS RESPONSIVE PARA DISPOSITIVOS MÓVILES (CELULARES)
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+    /* 1. Cambiar la estructura de horizontal a vertical */
+    .app-container {
+        flex-direction: column;
+        overflow-y: auto;
+        height: auto;
+    }
+
+    /* 2. Barra lateral se convierte en barra superior */
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 16px;
+    }
+
+    .brand {
+        margin-bottom: 16px;
+        justify-content: center;
+    }
+
+    .menu {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 4px;
+        justify-content: center;
+    }
+
+    .menu-item {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    .user-profile {
+        display: none; /* Ocultar perfil en móvil para ahorrar espacio */
+    }
+
+    /* 3. Contenido Principal Ajustado */
+    .main-content {
+        padding: 16px;
+    }
+
+    .top-header {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+    }
+
+    .search-bar {
+        width: 100%;
+    }
+
+    .btn-primary {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* 4. Tarjetas de resumen en una sola columna */
+    .dashboard-overview {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    /* 5. Cuadrícula de alertas en una sola columna */
+    .alerts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* 6. Caja de Login adaptable al ancho del celular */
+    .login-box {
+        width: 90%;
+        padding: 24px;
+    }
+}
+
+
 /* Color al pasar el mouse por encima */
 .btn-action-table.edit:hover {
     background-color: rgba(99, 102, 241, 0.15);

@@ -579,11 +579,16 @@ body {
    ESTILOS RESPONSIVE PARA DISPOSITIVOS MÓVILES (CELULARES)
    ========================================================================== */
 @media screen and (max-width: 768px) {
+    /* Forzar a que el cuerpo de la página SÍ permita deslizar en el celular */
+    body {
+        overflow-y: auto !important;
+        height: auto !important;
+    }
     /* 1. Cambiar la estructura de horizontal a vertical */
     .app-container {
         flex-direction: column;
-        overflow-y: auto;
-        height: auto;
+        overflow-y: !important;
+        height: !important;
     }
 
     /* 2. Barra lateral se convierte en barra superior */

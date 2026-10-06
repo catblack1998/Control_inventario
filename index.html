@@ -10,28 +10,31 @@
     <link href="https://googleapis.com" rel="stylesheet">
 </head>
 <body>
-        <!-- PANTALLA DE INICIO DE SESIÓN (LOGIN) -->
+        <!-- PANTALLA DE SEGURIDAD INTELIGENTE (REGISTRO / LOGIN) -->
     <div id="login-overlay" class="login-overlay">
         <div class="login-box">
             <div class="login-header">
                 <span style="font-size: 40px;">🛒</span>
-                <h2>SuperStock Login</h2>
-                <p>Introduce las credenciales para acceder al sistema del supermercado.</p>
+                <!-- El título y el texto cambiarán solos mediante JavaScript -->
+                <h2 id="login-title">Configuración Inicial</h2>
+                <p id="login-description">Detectamos que es tu primera vez aquí. Crea las credenciales maestras de tu supermercado.</p>
             </div>
             <form id="loginForm" class="modal-form">
                 <div class="form-group">
-                    <label for="login-user">Usuario / Empleado</label>
-                    <input type="text" id="login-user" placeholder="Ej. admin" required>
+                    <label for="login-user">Usuario Administrador</label>
+                    <input type="text" id="login-user" placeholder="Ej. mi_usuario" required>
                 </div>
                 <div class="form-group">
-                    <label for="login-pass">Contraseña de Seguridad</label>
+                    <label for="login-pass" id="label-pass">Contraseña de Seguridad</label>
                     <input type="password" id="login-pass" placeholder="••••••••" required>
                 </div>
+                <!-- Mensaje de aviso de error sutil -->
                 <p id="login-error" style="color: var(--danger); font-size: 13px; text-align: center; display: none;">⚠️ Usuario o contraseña incorrectos.</p>
-                <button type="submit" class="btn-primary" style="width: 100%; margin-top: 10px;">🔓 Entrar al Sistema</button>
+                <button type="submit" id="btn-login-submit" class="btn-primary" style="width: 100%; margin-top: 10px;">💾 Registrar y Activar</button>
             </form>
         </div>
     </div>
+
 
     <div class="app-container">
         <!-- Barra Lateral de Navegación -->
